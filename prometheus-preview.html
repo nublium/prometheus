@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prometheus's Den — Preview</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #c8a878;
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(196, 100, 36, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 70% at 50% 100%, rgba(180, 60, 30, 0.10) 0%, transparent 70%),
+    linear-gradient(180deg, #0a0604 0%, #15090a 50%, #0a0604 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* === DEMO BANNER === */
+.demo-banner {
+  background: linear-gradient(90deg, rgba(120, 50, 25, 0.4), rgba(196, 100, 36, 0.5), rgba(120, 50, 25, 0.4));
+  border-bottom: 1px solid #8a4a1c;
+  color: #f0d49a;
+  text-align: center;
+  padding: 13px 20px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 5px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background: rgba(8, 4, 2, 0.95);
+  border-bottom: 1px solid #3d2010;
+  padding: 11px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+}
+
+.navbar-left a, .navbar-right a {
+  color: #a87848;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.navbar-left a:hover, .navbar-right a:hover {
+  color: #e8a85c;
+  text-shadow: 0 0 12px rgba(212, 136, 48, 0.6);
+}
+
+.navbar-right a:last-child { margin-right: 0; }
+
+/* === BREADCRUMB === */
+.breadcrumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid #2a1810;
+  padding: 14px 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #7a5838;
+  letter-spacing: 0.8px;
+}
+
+.breadcrumb a {
+  color: #b88858;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: #e8a85c; }
+
+/* === MAIN CONTAINER === */
+.main-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 25px;
+  display: grid;
+  grid-template-columns: 1fr 290px;
+  gap: 28px;
+}
+
+/* === TERRITORY DESCRIPTION === */
+.territory-description {
+  background:
+    linear-gradient(180deg, rgba(48, 28, 16, 0.55) 0%, rgba(20, 12, 8, 0.85) 100%);
+  border: 1px solid #5e3018;
+  border-radius: 3px;
+  padding: 50px 42px 42px;
+  position: relative;
+  box-shadow: 0 0 40px rgba(180, 80, 30, 0.08), inset 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Ornamental corners */
+.territory-description::before,
+.territory-description::after {
+  content: '✦';
+  position: absolute;
+  top: 14px;
+  color: #b86628;
+  font-size: 13px;
+  text-shadow: 0 0 10px rgba(212, 136, 48, 0.5);
+}
+.territory-description::before { left: 22px; }
+.territory-description::after { right: 22px; }
+
+/* === DEN TITLE === */
+.den-title-block {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #5e3018;
+  position: relative;
+}
+
+.den-title-block::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 38%;
+  right: 38%;
+  height: 3px;
+  background: radial-gradient(ellipse, rgba(212, 136, 48, 0.6) 0%, transparent 70%);
+}
+
+.den-title {
+  font-family: 'Cinzel', serif;
+  font-size: 46px;
+  font-weight: 600;
+  color: #e8a85c;
+  letter-spacing: 9px;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-shadow:
+    0 0 25px rgba(212, 136, 48, 0.45),
+    0 0 50px rgba(196, 72, 36, 0.25),
+    0 2px 0 rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+
+.den-ornament {
+  text-align: center;
+  margin: 8px 0 14px;
+  color: #8a4a1c;
+  font-size: 13px;
+  letter-spacing: 14px;
+}
+
+.den-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: #b89868;
+  font-size: 17px;
+  line-height: 2;
+  letter-spacing: 1.2px;
+}
+
+.den-subtitle .accent {
+  color: #d48830;
+  font-weight: 500;
+}
+
+/* === TOP ROW (2 small boxes) === */
+.top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+/* === BOX === */
+.box {
+  background:
+    linear-gradient(180deg, rgba(58, 32, 18, 0.75) 0%, rgba(30, 18, 10, 0.9) 100%);
+  border: 1px solid #6e3a1c;
+  border-radius: 2px;
+  padding: 24px 26px 22px;
+  position: relative;
+  transition: all 0.35s ease;
+  box-shadow: inset 0 1px 0 rgba(232, 168, 92, 0.05);
+}
+
+.box:hover {
+  border-color: #c87838;
+  box-shadow:
+    0 0 28px rgba(212, 136, 48, 0.2),
+    inset 0 1px 0 rgba(232, 168, 92, 0.12);
+}
+
+.box-title {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 13px;
+  color: #e8a85c;
+  text-align: center;
+  margin: 0 0 16px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #5e3018;
+  font-weight: 500;
+  position: relative;
+}
+
+.box-title::before {
+  content: '✦';
+  margin-right: 14px;
+  color: #b86628;
+  font-size: 10px;
+}
+
+.box-title::after {
+  content: '✦';
+  margin-left: 14px;
+  color: #b86628;
+  font-size: 10px;
+}
+
+.lore-box .box-title {
+  font-size: 14px;
+  letter-spacing: 7px;
+}
+
+.box-content {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #b89868;
+}
+
+.box-content p {
+  margin: 0 0 11px;
+}
+
+.box-content p:last-child { margin-bottom: 0; }
+
+.box-content strong {
+  color: #e8a85c;
+  font-weight: 600;
+}
+
+.box-content em {
+  font-family: 'Cormorant Garamond', serif;
+  color: #d48830;
+  font-style: italic;
+}
+
+.box-content a {
+  color: #d48830;
+  text-decoration: none;
+  border-bottom: 1px dashed #6e3a1c;
+  transition: all 0.2s;
+}
+
+.box-content a:hover {
+  color: #f0c478;
+  border-bottom-color: #d48830;
+  text-shadow: 0 0 8px rgba(212, 136, 48, 0.5);
+}
+
+.box-content .key {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8a6848;
+}
+
+/* Spark bullet */
+.spark {
+  color: #b86628;
+  margin-right: 8px;
+  font-size: 11px;
+  text-shadow: 0 0 6px rgba(184, 102, 40, 0.5);
+}
+
+/* === DIVIDER === */
+.divider {
+  text-align: center;
+  margin: 22px 0;
+  color: #8a4a1c;
+  letter-spacing: 12px;
+  font-size: 11px;
+}
+
+.divider-thin {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #5e3018, transparent);
+  margin: 18px 0;
+}
+
+/* === PULL QUOTE === */
+.pullquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: #e8a85c;
+  text-align: center;
+  margin: 24px 30px;
+  padding: 18px 24px;
+  border-top: 1px solid #5e3018;
+  border-bottom: 1px solid #5e3018;
+  line-height: 1.55;
+  position: relative;
+}
+
+.pullquote::before {
+  content: '"';
+  position: absolute;
+  top: 4px;
+  left: 14px;
+  font-size: 36px;
+  color: #b86628;
+  opacity: 0.5;
+  font-family: 'Cinzel', serif;
+}
+
+.pullquote::after {
+  content: '"';
+  position: absolute;
+  bottom: -10px;
+  right: 14px;
+  font-size: 36px;
+  color: #b86628;
+  opacity: 0.5;
+  font-family: 'Cinzel', serif;
+}
+
+/* === FEATURE IMAGE PLACEHOLDER (for imgur images) === */
+.feature-image {
+  width: 100%;
+  height: 180px;
+  background:
+    radial-gradient(ellipse at center, rgba(184, 102, 40, 0.15), transparent 70%),
+    linear-gradient(135deg, #2a1810 0%, #3d2417 50%, #2a1810 100%);
+  border: 1px solid #5e3018;
+  border-radius: 2px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: #5e3018;
+  letter-spacing: 2px;
+  font-size: 13px;
+  position: relative;
+}
+
+.feature-image::before {
+  content: '✦  artwork  ✦';
+  letter-spacing: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: #6e3a1c;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sidebar-panel {
+  background: rgba(20, 12, 8, 0.85);
+  border: 1px solid #5e3018;
+  border-radius: 3px;
+  padding: 18px 16px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-panel-title {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 3.5px;
+  font-size: 11px;
+  color: #d48830;
+  text-align: center;
+  border-bottom: 1px solid #5e3018;
+  padding-bottom: 9px;
+  margin: 0 0 13px;
+  font-weight: 500;
+}
+
+/* Avatar (round) */
+.avatar-wrap {
+  text-align: center;
+}
+
+.avatar-img {
+  width: 170px;
+  height: 170px;
+  background:
+    radial-gradient(ellipse at 50% 40%, #5e3018 0%, #2a1810 60%, #0a0604 100%);
+  border-radius: 50%;
+  border: 2px solid #8a4a1c;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5e3018;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  box-shadow:
+    0 0 20px rgba(196, 100, 36, 0.25),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.avatar-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: #e8a85c;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.avatar-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #8a6848;
+  margin-top: 3px;
+}
+
+/* Stats */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 2px;
+  border-bottom: 1px dashed #2a1810;
+  font-size: 12px;
+}
+
+.stat-row:last-child { border-bottom: none; }
+
+.stat-label {
+  color: #7a5838;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1.5px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  color: #e8a85c;
+  font-weight: 600;
+  font-family: 'EB Garamond', serif;
+}
+
+/* Progress bars */
+.progress-row { margin: 11px 0; }
+.progress-row:first-child { margin-top: 4px; }
+.progress-row:last-child { margin-bottom: 4px; }
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #8a6848;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.progress-bar-bg {
+  background: #08040a;
+  height: 8px;
+  border-radius: 4px;
+  border: 1px solid #2a1810;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.progress-fill-energy { background: linear-gradient(90deg, #8a4a1c, #d48830); width: 78%; color: #d48830; }
+.progress-fill-hunger { background: linear-gradient(90deg, #6e3a1c, #b86628); width: 62%; color: #b86628; }
+.progress-fill-thirst { background: linear-gradient(90deg, #7a2818, #c44824); width: 48%; color: #c44824; }
+
+/* Bookmarks */
+.bookmark {
+  display: block;
+  padding: 7px 10px;
+  margin-bottom: 4px;
+  border-left: 2px solid #5e3018;
+  font-size: 12.5px;
+  color: #b89868;
+  text-decoration: none;
+  font-family: 'EB Garamond', serif;
+  transition: all 0.25s;
+}
+
+.bookmark:hover {
+  border-left-color: #d48830;
+  background: rgba(184, 102, 40, 0.10);
+  color: #e8a85c;
+  padding-left: 14px;
+}
+
+.bookmark-icon {
+  color: #b86628;
+  margin-right: 8px;
+  font-size: 9px;
+}
+
+/* === COMMENT BOX === */
+.comment-box {
+  max-width: 1180px;
+  margin: 12px auto 50px;
+  padding: 0 25px;
+}
+
+.comment-box-inner {
+  background: rgba(20, 12, 8, 0.85);
+  border: 1px solid #5e3018;
+  border-radius: 3px;
+  padding: 22px 24px;
+}
+
+.comment-box-title {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 4.5px;
+  font-size: 12px;
+  color: #d48830;
+  margin: 0 0 14px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #5e3018;
+}
+
+.comment-textarea {
+  width: 100%;
+  background: #0a0604;
+  border: 1px solid #2a1810;
+  border-radius: 3px;
+  padding: 12px 14px;
+  color: #c8a878;
+  font-family: 'EB Garamond', serif;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.comment-textarea:focus { border-color: #8a4a1c; }
+.comment-textarea::placeholder { color: #5e3018; font-style: italic; }
+
+.comment-submit {
+  background: linear-gradient(180deg, #b86628 0%, #8a4a1c 100%);
+  color: #f0d49a;
+  border: 1px solid #d48830;
+  padding: 9px 26px;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.3s;
+}
+
+.comment-submit:hover {
+  background: linear-gradient(180deg, #d48830 0%, #b86628 100%);
+  box-shadow: 0 0 18px rgba(212, 136, 48, 0.5);
+  color: #fae8c0;
+}
+
+/* === FOOTER === */
+.page-footer {
+  text-align: center;
+  padding: 20px;
+  color: #5e3018;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  ✦ &nbsp; live preview — Prometheus's Den · phoenix-fire theme &nbsp; ✦
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="navbar-left">
+    <a href="#">Home</a>
+    <a href="#">Territory</a>
+    <a href="#">Den</a>
+    <a href="#">Cubs</a>
+    <a href="#">Lionesses</a>
+    <a href="#">Explore</a>
+  </div>
+  <div class="navbar-right">
+    <a href="#">Mail</a>
+    <a href="#">Profile</a>
+    <a href="#">Logout</a>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Lioden</a> &nbsp;›&nbsp; <a href="#">Tsaari</a> &nbsp;›&nbsp; <a href="#">Territory</a> &nbsp;›&nbsp; <em>Prometheus's Den</em>
+</div>
+
+<!-- MAIN -->
+<div class="main-container">
+
+  <!-- ============ TERRITORY DESCRIPTION ============ -->
+  <div class="territory-description">
+
+    <!-- Title block -->
+    <div class="den-title-block">
+      <h1 class="den-title">Prometheus's Den</h1>
+      <div class="den-ornament">✦ &nbsp; ◆ &nbsp; ✦</div>
+      <div class="den-subtitle">
+        <em>Prometheus.</em><br>
+        <em>That's what they call me.</em><br>
+        <em><span class="accent">Your heart, phoenix fire.</span></em>
+      </div>
+    </div>
+
+    <!-- Top row: Player + Links -->
+    <div class="top-row">
+
+      <!-- Box 1: Player -->
+      <div class="box">
+        <h2 class="box-title">Player</h2>
+        <div class="box-content">
+          <p><strong>Tsaari</strong> &nbsp;·&nbsp; <span class="key">#37874</span></p>
+          <p>The hand behind the pride. Found here at odd hours, occasionally feral, generally well-meaning.</p>
+          <div class="divider-thin"></div>
+          <p><span class="key">timezone</span> &nbsp; [your TZ]<br>
+          <span class="key">roleplay</span> &nbsp; open · selective<br>
+          <span class="key">trades</span> &nbsp; always negotiable</p>
+        </div>
+      </div>
+
+      <!-- Box 2: Links -->
+      <div class="box">
+        <h2 class="box-title">Links &amp; Stuff</h2>
+        <div class="box-content">
+          <p><span class="spark">◆</span><a href="#">Side account</a></p>
+          <p><span class="spark">◆</span><a href="#">Sales thread</a></p>
+          <p><span class="spark">◆</span><a href="#">RP archive</a></p>
+          <p><span class="spark">◆</span><a href="#">Wishlist</a></p>
+          <p><span class="spark">◆</span><a href="#">Discord</a></p>
+          <div class="divider-thin"></div>
+          <p style="text-align:center;font-style:italic;color:#7a5838;font-size:12.5px;margin-top:8px;">
+            travelers welcome · thieves discouraged
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Big box: Lore -->
+    <div class="box lore-box">
+      <h2 class="box-title">Lore</h2>
+      <div class="box-content">
+        <p>Once, the world was cold.</p>
+        <p>Then he came down — bronze in his teeth, fire in his fur, a stolen sun chained to the staff at his shoulder. <strong>Prometheus.</strong> The thief who refused to apologize. The king who would not bow.</p>
+
+        <!-- IMGUR IMAGE PLACEHOLDER — replace src with image URL from imgur album -->
+        <div class="feature-image"></div>
+
+        <div class="pullquote">
+          I gave them warmth, and they called it sin.<br>
+          <em>So be it. Let me burn for what I love.</em>
+        </div>
+
+        <p>The pride that gathers around him is small but bright — pilgrims, exiles, fire-keepers. They tend the flame, they speak in low voices, they remember names the rest of the world has forgotten. Their den is not a hiding place. It is a hearth.</p>
+
+        <p>By night, the eagle returns. Each dawn, what's lost is given back, ember by ember, by the lanterns of the lionesses who refused to let the dark have him.</p>
+
+        <div class="divider">✦ &nbsp; ◆ &nbsp; ✦</div>
+
+        <p style="text-align:center;"><em>His mane is the color of old fire.<br>
+        His eyes — the color of the moment before dawn.</em></p>
+
+        <div class="divider">✦ &nbsp; ◆ &nbsp; ✦</div>
+
+        <p style="text-align:center;font-style:italic;color:#7a5838;font-size:13px;margin-top:6px;">
+          enter, traveller — but do not steal what's already given freely.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ SIDEBAR ============ -->
+  <div class="sidebar">
+
+    <!-- Avatar -->
+    <div class="sidebar-panel">
+      <div class="avatar-wrap">
+        <div class="avatar-img">✦ avatar ✦</div>
+        <div class="avatar-name">Prometheus</div>
+        <div class="avatar-tag">phoenix-king · ember-bringer</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sidebar-panel">
+      <h3 class="sidebar-panel-title">Stats</h3>
+      <div class="stat-row"><span class="stat-label">Strength</span><span class="stat-value">142</span></div>
+      <div class="stat-row"><span class="stat-label">Agility</span><span class="stat-value">98</span></div>
+      <div class="stat-row"><span class="stat-label">Smarts</span><span class="stat-value">115</span></div>
+      <div class="stat-row"><span class="stat-label">Stamina</span><span class="stat-value">130</span></div>
+      <div class="stat-row"><span class="stat-label">Studs</span><span class="stat-value">58</span></div>
+    </div>
+
+    <!-- Vitals -->
+    <div class="sidebar-panel">
+      <h3 class="sidebar-panel-title">Vitals</h3>
+      <div class="progress-row">
+        <div class="progress-label"><span>Energy</span><span>78%</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill progress-fill-energy"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>Hunger</span><span>62%</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill progress-fill-hunger"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>Thirst</span><span>48%</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill progress-fill-thirst"></div></div>
+      </div>
+    </div>
+
+    <!-- Bookmarks -->
+    <div class="sidebar-panel">
+      <h3 class="sidebar-panel-title">Bookmarks</h3>
+      <a href="#" class="bookmark"><span class="bookmark-icon">◆</span>Cave of Embers</a>
+      <a href="#" class="bookmark"><span class="bookmark-icon">◆</span>Bronze Run</a>
+      <a href="#" class="bookmark"><span class="bookmark-icon">◆</span>Witch Hut</a>
+      <a href="#" class="bookmark"><span class="bookmark-icon">◆</span>The Slate Path</a>
+      <a href="#" class="bookmark"><span class="bookmark-icon">◆</span>My Pride</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- COMMENT BOX -->
+<div class="comment-box">
+  <div class="comment-box-inner">
+    <h3 class="comment-box-title">Leave a Comment</h3>
+    <textarea class="comment-textarea" placeholder="Speak, traveller..."></textarea>
+    <button class="comment-submit">Post</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  ✦ &nbsp; lioden · prometheus's den · ember &amp; bronze &nbsp; ✦
+</div>
+
+</body>
+</html>

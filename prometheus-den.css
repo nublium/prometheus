@@ -1,0 +1,372 @@
+/* ============================================================
+   PROMETHEUS'S DEN — phoenix fire theme
+   for Tsaari (#37874) · custom by nub (#166079)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+/* ============ PAGE BACKGROUND ============ */
+body {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(196, 100, 36, 0.15) 0%, transparent 65%) fixed,
+    radial-gradient(ellipse 70% 70% at 50% 100%, rgba(180, 60, 30, 0.10) 0%, transparent 70%) fixed,
+    linear-gradient(180deg, #0a0604 0%, #15090a 50%, #0a0604 100%) fixed !important;
+  color: #c8a878 !important;
+  font-family: 'EB Garamond', Georgia, serif !important;
+}
+
+/* ============ ROUND AVATAR ============ */
+img[src*="/images/tags/"] {
+  border-radius: 50% !important;
+  border: 2px solid #8a4a1c !important;
+  box-shadow: 0 0 18px rgba(196, 100, 36, 0.25) !important;
+}
+
+/* ============ LIODEN PANELS / SIDEBAR ============ */
+.panel,
+.panel-default,
+.panel-success,
+.panel-info,
+.panel-warning,
+.panel-danger,
+.well,
+fieldset {
+  background: rgba(20, 12, 8, 0.85) !important;
+  border: 1px solid #5e3018 !important;
+  border-radius: 3px !important;
+  color: #c8a878 !important;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+.panel-heading,
+.panel-default > .panel-heading,
+.panel-success > .panel-heading,
+.panel-info > .panel-heading,
+fieldset legend {
+  background: linear-gradient(180deg, #3d2417 0%, #2a1810 100%) !important;
+  border-bottom: 1px solid #5e3018 !important;
+  color: #d48830 !important;
+  font-family: 'Cinzel', serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 3px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.panel-title { color: #d48830 !important; }
+
+/* ============ PROGRESS BARS ============ */
+.progress {
+  background: #08040a !important;
+  border: 1px solid #2a1810 !important;
+  border-radius: 4px !important;
+  height: 10px !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #8a4a1c, #d48830) !important;
+  box-shadow: 0 0 8px rgba(212, 136, 48, 0.5) !important;
+}
+
+.progress-bar-success { background: linear-gradient(90deg, #8a4a1c, #d48830) !important; }
+.progress-bar-warning { background: linear-gradient(90deg, #6e3a1c, #b86628) !important; }
+.progress-bar-danger { background: linear-gradient(90deg, #7a2818, #c44824) !important; }
+.progress-bar-info { background: linear-gradient(90deg, #5e3018, #a87838) !important; }
+
+/* ============ LINKS ============ */
+a {
+  color: #d48830 !important;
+  text-decoration: none !important;
+}
+a:hover {
+  color: #f0c478 !important;
+  text-shadow: 0 0 8px rgba(212, 136, 48, 0.5) !important;
+}
+
+/* ============ BUTTONS ============ */
+.btn,
+button.btn,
+input[type="submit"],
+input[type="button"] {
+  background: linear-gradient(180deg, #b86628 0%, #8a4a1c 100%) !important;
+  color: #f0d49a !important;
+  border: 1px solid #d48830 !important;
+  font-family: 'Cinzel', serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2.5px !important;
+  font-size: 11px !important;
+  border-radius: 3px !important;
+  text-shadow: none !important;
+  transition: all 0.3s !important;
+}
+
+.btn:hover,
+button.btn:hover,
+input[type="submit"]:hover {
+  background: linear-gradient(180deg, #d48830 0%, #b86628 100%) !important;
+  box-shadow: 0 0 15px rgba(212, 136, 48, 0.5) !important;
+  color: #fae8c0 !important;
+}
+
+.btn-success { background: linear-gradient(180deg, #b86628 0%, #8a4a1c 100%) !important; }
+.btn-danger { background: linear-gradient(180deg, #c44824 0%, #7a2818 100%) !important; border-color: #c44824 !important; }
+.btn-warning { background: linear-gradient(180deg, #d48830 0%, #b86628 100%) !important; }
+
+/* ============ FORMS / INPUTS ============ */
+.form-control,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background: #0a0604 !important;
+  border: 1px solid #2a1810 !important;
+  color: #c8a878 !important;
+  font-family: 'EB Garamond', serif !important;
+  border-radius: 3px !important;
+}
+
+.form-control:focus,
+textarea:focus,
+input:focus {
+  border-color: #8a4a1c !important;
+  box-shadow: 0 0 8px rgba(184, 102, 40, 0.3) !important;
+  outline: none !important;
+}
+
+/* ============ TABLES ============ */
+.table,
+table {
+  color: #c8a878 !important;
+}
+
+.table > thead > tr > th,
+table th {
+  background: #2a1810 !important;
+  border-bottom: 1px solid #5e3018 !important;
+  color: #d48830 !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+}
+
+.table > tbody > tr > td,
+table td {
+  border-top: 1px solid #2a1810 !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(45, 28, 16, 0.3) !important;
+}
+
+/* ============ HEADINGS ============ */
+h1, h2, h3, h4, h5, h6 {
+  color: #e8a85c !important;
+  font-family: 'Cinzel', serif !important;
+}
+
+/* ============ CHATBOX ============ */
+#chatbox,
+#chatMessages,
+.chat-message {
+  background: rgba(10, 6, 4, 0.9) !important;
+  color: #c8a878 !important;
+}
+
+/* ============ ALERTS ============ */
+.alert {
+  background: rgba(45, 28, 16, 0.6) !important;
+  border: 1px solid #5e3018 !important;
+  color: #c8a878 !important;
+  border-radius: 3px !important;
+}
+
+.alert-success { border-left: 4px solid #d48830 !important; }
+.alert-info    { border-left: 4px solid #a87838 !important; }
+.alert-warning { border-left: 4px solid #b86628 !important; }
+.alert-danger  { border-left: 4px solid #c44824 !important; }
+
+/* ============================================================
+   TERRITORY DESCRIPTION — custom layout classes
+   (use these on elements inside the territory description HTML)
+   ============================================================ */
+
+.prom-wrap {
+  background: linear-gradient(180deg, rgba(48, 28, 16, 0.55) 0%, rgba(20, 12, 8, 0.85) 100%);
+  border: 1px solid #5e3018;
+  border-radius: 3px;
+  padding: 50px 42px 42px;
+  position: relative;
+  box-shadow: 0 0 40px rgba(180, 80, 30, 0.08), inset 0 0 60px rgba(0, 0, 0, 0.3);
+  font-family: 'EB Garamond', Georgia, serif;
+  color: #c8a878;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.prom-wrap::before,
+.prom-wrap::after {
+  content: '✦';
+  position: absolute;
+  top: 14px;
+  color: #b86628;
+  font-size: 13px;
+  text-shadow: 0 0 10px rgba(212, 136, 48, 0.5);
+}
+.prom-wrap::before { left: 22px; }
+.prom-wrap::after  { right: 22px; }
+
+/* Title */
+.prom-title-block {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #5e3018;
+  position: relative;
+}
+.prom-title-block::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 38%;
+  right: 38%;
+  height: 3px;
+  background: radial-gradient(ellipse, rgba(212, 136, 48, 0.6) 0%, transparent 70%);
+}
+.prom-title {
+  font-family: 'Cinzel', serif;
+  font-size: 46px;
+  font-weight: 600;
+  color: #e8a85c;
+  letter-spacing: 9px;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-shadow: 0 0 25px rgba(212, 136, 48, 0.45), 0 0 50px rgba(196, 72, 36, 0.25), 0 2px 0 rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+.prom-ornament {
+  text-align: center;
+  margin: 8px 0 14px;
+  color: #8a4a1c;
+  font-size: 13px;
+  letter-spacing: 14px;
+}
+.prom-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: #b89868;
+  font-size: 17px;
+  line-height: 2;
+  letter-spacing: 1.2px;
+}
+.prom-subtitle .prom-accent { color: #d48830; font-weight: 500; }
+
+/* Grid rows */
+.prom-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+/* Box */
+.prom-box {
+  background: linear-gradient(180deg, rgba(58, 32, 18, 0.75) 0%, rgba(30, 18, 10, 0.9) 100%);
+  border: 1px solid #6e3a1c;
+  border-radius: 2px;
+  padding: 24px 26px 22px;
+  position: relative;
+  transition: all 0.35s ease;
+  box-shadow: inset 0 1px 0 rgba(232, 168, 92, 0.05);
+}
+.prom-box:hover {
+  border-color: #c87838;
+  box-shadow: 0 0 28px rgba(212, 136, 48, 0.2), inset 0 1px 0 rgba(232, 168, 92, 0.12);
+}
+.prom-box-title {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 13px;
+  color: #e8a85c;
+  text-align: center;
+  margin: 0 0 16px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #5e3018;
+  font-weight: 500;
+}
+.prom-box-title::before { content: '✦'; margin-right: 14px; color: #b86628; font-size: 10px; }
+.prom-box-title::after  { content: '✦'; margin-left: 14px;  color: #b86628; font-size: 10px; }
+
+.prom-box-lore .prom-box-title { font-size: 14px; letter-spacing: 7px; }
+
+.prom-box p { margin: 0 0 11px; }
+.prom-box p:last-child { margin-bottom: 0; }
+.prom-box strong { color: #e8a85c; font-weight: 600; }
+.prom-box em { font-family: 'Cormorant Garamond', serif; color: #d48830; font-style: italic; }
+.prom-box a {
+  color: #d48830 !important;
+  text-decoration: none !important;
+  border-bottom: 1px dashed #6e3a1c;
+}
+.prom-box a:hover {
+  color: #f0c478 !important;
+  border-bottom-color: #d48830;
+  text-shadow: 0 0 8px rgba(212, 136, 48, 0.5);
+}
+
+.prom-key {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8a6848;
+}
+
+.prom-spark {
+  color: #b86628;
+  margin-right: 8px;
+  font-size: 11px;
+  text-shadow: 0 0 6px rgba(184, 102, 40, 0.5);
+}
+
+/* Dividers */
+.prom-divider {
+  text-align: center;
+  margin: 22px 0;
+  color: #8a4a1c;
+  letter-spacing: 12px;
+  font-size: 11px;
+}
+.prom-divider-thin {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #5e3018, transparent);
+  margin: 18px 0;
+}
+
+/* Pull quote */
+.prom-pullquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: #e8a85c;
+  text-align: center;
+  margin: 24px 30px;
+  padding: 18px 24px;
+  border-top: 1px solid #5e3018;
+  border-bottom: 1px solid #5e3018;
+  line-height: 1.55;
+}
+
+/* Feature image (for imgur artworks) */
+.prom-image {
+  width: 100%;
+  border: 1px solid #5e3018;
+  border-radius: 2px;
+  margin: 16px 0;
+  display: block;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
