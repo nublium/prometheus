@@ -764,3 +764,10 @@ h1, h2, h3, h4, h5, h6 {
 .prom-box::-webkit-scrollbar-track { background: rgba(8, 4, 2, 0.6) !important; }
 .prom-box::-webkit-scrollbar-thumb { background: rgba(140, 72, 24, 0.38) !important; }
 .prom-box::-webkit-scrollbar-thumb:hover { background: rgba(212, 136, 48, 0.58) !important; }
+
+}
+
+img[src*="/images/tags/"] {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
