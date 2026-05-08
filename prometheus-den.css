@@ -760,11 +760,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Inline artwork images */
 .prom-image {
-    width: 100%;
+    max-width: 70%;
+    max-height: 250px;
     border: 1px solid #5e3018;
     display: block;
-    margin: 14px 0;
+    margin: 14px auto;
     box-shadow: 0 0 26px rgba(0, 0, 0, 0.58);
+    object-fit: cover;
 }
 
 /* Credit footer */
@@ -788,10 +790,3 @@ h1, h2, h3, h4, h5, h6 {
 .prom-box::-webkit-scrollbar-track { background: rgba(8, 4, 2, 0.6) !important; }
 .prom-box::-webkit-scrollbar-thumb { background: rgba(140, 72, 24, 0.38) !important; }
 .prom-box::-webkit-scrollbar-thumb:hover { background: rgba(212, 136, 48, 0.58) !important; }
-
-}
-
-img[src*="/images/tags/"] {
-  border-radius: 50% !important;
-  object-fit: cover !important;
-}

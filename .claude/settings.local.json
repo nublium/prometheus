@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:nublium.github.io)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "PowerShell(python --version 2>&1)",
+      "PowerShell(curl --version 2>&1)",
+      "PowerShell(ls \"$env:TEMP\\\\liodencssardenius\" 2>&1 | Select-Object -First 20)",
+      "Bash(ls \"C:\\\\Users\\\\Kimberly\\\\AppData\\\\Local\\\\Temp\\\\liodencssardenius\")",
+      "Bash(Copy-Item \"D:\\\\Download\\\\my css lioden\\\\prometheus-den.css\" \"C:\\\\Users\\\\Kimberly\\\\AppData\\\\Local\\\\Temp\\\\liodencssardenius\\\\prometheus-den.css\" -Force)",
+      "Bash(ls \"C:\\\\Users\\\\Kimberly\\\\AppData\\\\Local\\\\Temp\\\\prometheus\")",
+      "WebFetch(domain:imgur.com)",
+      "WebFetch(domain:www.lioden.com)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git config *)",
+      "Bash(git init *)",
+      "Bash(git checkout *)",
+      "Bash(git rebase *)"
+    ]
+  }
+}
