@@ -426,7 +426,7 @@ h3 a[href*="chat.php"]:hover {
 .chat_dark, .chat_dark *,
 #chatMessages, #chatMessages *,
 #fraSidebarChat, #fraSidebarChat * {
-    color: #8a7058 !important;
+    color: #000000 !important;
     text-shadow: none !important;
 }
 
