@@ -403,9 +403,303 @@ h3 a[href*="chat.php"]:hover {
 
 #fraSidebarChat.hidden { display: none !important; }
 
-/* Chat message row backgrounds — used inside the iframe and
-   on the full /chat.php page if the user navigates there.
-   Text colour kept muted (not too bright) for comfortable reading. */
+/* ============ CHAT IFRAME CONTENT — the actual chat messages ============
+   The chat sidebar is an iframe loading /chat.sidebar.php. Lioden's JS
+   (in territory.php) appends our prometheus-den.css to the iframe body
+   so our rules reach inside — but the iframe uses BEM-style selectors
+   (.s-chat-message, .s-chat__username, etc.), NOT the .chat_light /
+   .chat_dark classes of the legacy /chat.php page. We target both.
+   Default theme served in the iframe is the cream/tan "desert" theme,
+   which is why untouched chat shows light backgrounds with red text. */
+
+/* Iframe body wrapper + main container */
+.s-chat-sidebar,
+#fra_chatContainer,
+#fra_chatContainer.s-chat-sidebar {
+    background: rgba(8, 4, 2, 0.96) !important;
+    color: #8a7058 !important;
+    font-family: 'EB Garamond', Georgia, serif !important;
+}
+
+/* The CHANNEL bar at the top of the chat (MAIN ▼, settings menu) */
+.channelMenu {
+    background: linear-gradient(180deg, rgba(40, 18, 6, 0.94), rgba(20, 10, 3, 0.96)) !important;
+    border-bottom: 1px solid rgba(140, 72, 24, 0.42) !important;
+    color: #d48830 !important;
+}
+
+.chatMenu-container {
+    background: rgba(14, 7, 3, 0.96) !important;
+    border: 1px solid rgba(140, 72, 24, 0.42) !important;
+    color: #c8a878 !important;
+}
+
+.channelSwitcher,
+.chatMenu-option {
+    background: rgba(40, 18, 6, 0.85) !important;
+    border: 1px solid rgba(140, 72, 24, 0.38) !important;
+    color: #b86628 !important;
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    text-shadow: none !important;
+    padding: 4px 8px !important;
+    border-radius: 0 !important;
+}
+
+.channelSwitcher.active {
+    background: linear-gradient(180deg, rgba(140, 72, 24, 0.38), rgba(94, 48, 24, 0.42)) !important;
+    color: #e8a85c !important;
+    border-color: rgba(212, 136, 48, 0.55) !important;
+}
+
+.channelSwitcher:hover,
+.chatMenu-option:hover {
+    background: rgba(60, 28, 8, 0.94) !important;
+    color: #d48830 !important;
+    border-color: rgba(212, 136, 48, 0.55) !important;
+}
+
+/* The "Load new messages" pull-tab */
+#btnLoadNewMessages {
+    background: rgba(55, 26, 8, 0.94) !important;
+    border: 1px solid rgba(140, 72, 24, 0.55) !important;
+    color: #d48830 !important;
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase !important;
+}
+
+/* PINNED MESSAGE (the cream/blue strip showing event news at the top) */
+#chatMessagePinned,
+.s-chat-message__pinned {
+    background: linear-gradient(180deg, rgba(55, 26, 8, 0.92), rgba(28, 12, 4, 0.96)) !important;
+    border: 1px solid rgba(140, 72, 24, 0.48) !important;
+    color: #c8a878 !important;
+    text-shadow: none !important;
+    padding: 6px 10px !important;
+    font-family: 'EB Garamond', serif !important;
+}
+
+#chatMessagePinned a,
+.s-chat-message__pinned a {
+    color: #d48830 !important;
+    text-shadow: none !important;
+}
+
+#chatMessagePinned a:hover,
+.s-chat-message__pinned a:hover {
+    color: #e8a85c !important;
+}
+
+/* Message list wrapper */
+#chatMessageList {
+    background: transparent !important;
+    color: #8a7058 !important;
+}
+
+/* Each individual message row — alternate dark shades */
+.s-chat-message {
+    background: rgba(14, 7, 3, 0.88) !important;
+    border-bottom: 1px solid rgba(94, 48, 24, 0.18) !important;
+    color: #8a7058 !important;
+    text-shadow: none !important;
+    padding: 6px 10px !important;
+    margin: 0 !important;
+}
+
+.s-chat-message:nth-of-type(odd) {
+    background: rgba(20, 10, 4, 0.92) !important;
+}
+
+.s-chat-message:nth-of-type(even) {
+    background: rgba(12, 6, 3, 0.82) !important;
+}
+
+.s-chat-message:hover {
+    background: rgba(35, 18, 8, 0.94) !important;
+}
+
+/* Username links inside messages */
+.s-chat__username,
+.s-chat-message a.s-chat__username {
+    color: #c87a3a !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+    text-decoration: none !important;
+}
+
+.s-chat__username:hover {
+    color: #e8a85c !important;
+    text-shadow: none !important;
+}
+
+/* Donator (VIP) usernames — slightly brighter gold */
+.s-chat__username[data-type="donator"] {
+    color: #e0a050 !important;
+}
+
+/* New player username — muted */
+.s-chat__username[data-type="new"] {
+    color: #a08068 !important;
+}
+
+/* Staff usernames if present */
+.s-chat__username[data-type="staff"],
+.s-chat__username[data-type="moderator"] {
+    color: #f0b870 !important;
+}
+
+/* Message body text — main readability fix */
+.s-chat-message_content,
+.s-chat-message_content * {
+    color: #a89070 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+}
+
+.s-chat-message_content b {
+    color: #d48830 !important;
+}
+
+/* Pings (@username links inside messages) */
+.s-chat-message_content a.s-chat__username {
+    color: #c87a3a !important;
+    background: transparent !important;
+}
+
+/* Timestamp text */
+.s-chat-message_timestamp {
+    color: #5a4838 !important;
+    font-size: 10px !important;
+    font-style: italic !important;
+    font-family: 'EB Garamond', serif !important;
+    text-shadow: none !important;
+}
+
+/* Three-dot menu button on each message */
+.s-chat-message_menu {
+    background: rgba(40, 18, 6, 0.55) !important;
+    border: 1px solid rgba(94, 48, 24, 0.32) !important;
+    opacity: 0.55 !important;
+    transition: all 0.3s ease !important;
+}
+
+.s-chat-message_menu:hover {
+    opacity: 1 !important;
+    background: rgba(60, 28, 8, 0.92) !important;
+    border-color: rgba(212, 136, 48, 0.55) !important;
+}
+
+/* Donator / new-player / staff icon tags inside messages */
+.s-chat-message__icon {
+    filter: sepia(40%) saturate(80%) brightness(85%) !important;
+    opacity: 0.85 !important;
+}
+
+/* CHAT INPUT FIELD */
+#txtChatInput {
+    background: rgba(8, 4, 2, 0.96) !important;
+    border: 1px solid rgba(140, 72, 24, 0.50) !important;
+    color: #c8a878 !important;
+    font-family: 'EB Garamond', serif !important;
+    padding: 6px 8px !important;
+    border-radius: 0 !important;
+}
+
+#txtChatInput:focus {
+    border-color: rgba(212, 136, 48, 0.65) !important;
+    box-shadow: 0 0 8px rgba(184, 102, 40, 0.25) !important;
+    outline: none !important;
+}
+
+#txtChatInput::placeholder {
+    color: #5a4838 !important;
+    font-style: italic !important;
+}
+
+/* "Code of Conduct" link above the input */
+#txtChatContainer a[href*="code.php"] {
+    color: #8a7058 !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    text-shadow: none !important;
+    text-decoration: none !important;
+}
+
+#txtChatContainer a[href*="code.php"]:hover {
+    color: #d48830 !important;
+    text-shadow: none !important;
+}
+
+/* Character counter (0 / 150) */
+#lblCharacterCounter {
+    color: #8a7058 !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 10px !important;
+    text-shadow: none !important;
+}
+
+#lblCharacterCounter span {
+    color: #b86628 !important;
+}
+
+/* The ROAR! send button */
+#btnChatSend {
+    background: linear-gradient(180deg, #3d1c0a 0%, #281006 100%) !important;
+    border: 1px solid rgba(140, 72, 24, 0.55) !important;
+    color: #d48830 !important;
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    font-size: 11px !important;
+    padding: 6px 16px !important;
+    text-shadow: none !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+#btnChatSend:hover {
+    background: linear-gradient(180deg, #5e2810 0%, #3d1c0a 100%) !important;
+    border-color: rgba(212, 136, 48, 0.65) !important;
+    color: #e8a85c !important;
+    box-shadow: 0 0 10px rgba(184, 102, 40, 0.32) !important;
+}
+
+/* Emote/smiley picker */
+.emoteInput {
+    background: rgba(40, 18, 6, 0.88) !important;
+    border: 1px solid rgba(140, 72, 24, 0.45) !important;
+    color: #b86628 !important;
+}
+
+.emoteList {
+    background: rgba(8, 4, 2, 0.97) !important;
+    border: 1px solid rgba(140, 72, 24, 0.50) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Achievement banner that occasionally shows above the chat */
+.alert.achievement,
+.alert-warning.achievement {
+    background: linear-gradient(180deg, rgba(55, 26, 8, 0.92), rgba(28, 12, 4, 0.96)) !important;
+    border: 1px solid rgba(140, 72, 24, 0.55) !important;
+    color: #d48830 !important;
+    text-shadow: none !important;
+}
+
+.alert.achievement a,
+.alert-warning.achievement a {
+    color: #e8a85c !important;
+    text-shadow: none !important;
+}
+
+/* ============ LEGACY /chat.php PAGE — separate from sidebar iframe ============
+   Used only if the user clicks "Chat Room →" and visits the full chat page.
+   Kept in case our CSS leaks onto that page via global custom CSS. */
 .chat_light,
 #chatMessages .chat_light {
     background: rgba(12, 6, 3, 0.82) !important;
@@ -420,28 +714,18 @@ h3 a[href*="chat.php"]:hover {
     color: #8a7058 !important;
 }
 
-/* Chat text — names, message bodies, timestamps, system text.
-   Keep all of it muted so nothing screams against the dark background. */
 .chat_light, .chat_light *,
-.chat_dark, .chat_dark *,
-#chatMessages, #chatMessages *,
-#fraSidebarChat, #fraSidebarChat * {
-    color: #000000 !important;
+.chat_dark, .chat_dark * {
     text-shadow: none !important;
 }
 
-/* Usernames / links inside chat — slightly brighter ember so they stand out
-   without being glaring. */
-.chat_light a, .chat_dark a,
-#chatMessages a, #fraSidebarChat a {
-    color: #a0673a !important;
+.chat_light a, .chat_dark a {
+    color: #c87a3a !important;
     text-shadow: none !important;
 }
 
-.chat_light a:hover, .chat_dark a:hover,
-#chatMessages a:hover, #fraSidebarChat a:hover {
-    color: #d48830 !important;
-    text-shadow: none !important;
+.chat_light a:hover, .chat_dark a:hover {
+    color: #e8a85c !important;
 }
 
 /* ============ INPUT FIELDS ============ */
