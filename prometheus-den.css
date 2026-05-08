@@ -309,8 +309,7 @@ h3[style*="position: relative"] {
     padding: 8px 12px !important;
     margin: 14px 0 0 !important;
     background: linear-gradient(180deg, rgba(48, 22, 6, 0.96), rgba(24, 10, 3, 0.99)) !important;
-    border: 1px solid rgba(140, 72, 24, 0.38) !important;
-    border-bottom: none !important;
+    border: none !important;
     font-family: 'Cinzel', serif !important;
     font-size: 13px !important;
     letter-spacing: 2px !important;
@@ -385,20 +384,23 @@ h3 a[href*="chat.php"]:hover {
     text-shadow: none !important;
 }
 
-/* Sidebar chat iframe wrapper */
+/* Sidebar chat iframe wrapper — no border, no padding, the dark
+   background of #fra_chatContainer inside the iframe handles the visual edge. */
 #fraSidebarChat {
     background: rgba(8, 4, 2, 0.92) !important;
-    border: 1px solid rgba(140, 72, 24, 0.38) !important;
-    border-top: none !important;
+    border: none !important;
     margin: 0 0 14px !important;
     padding: 0 !important;
+    box-shadow: none !important;
 }
 
 #fraSidebarChat iframe {
     background: rgba(8, 4, 2, 0.92) !important;
     border: none !important;
+    outline: none !important;
     width: 100% !important;
     display: block !important;
+    box-shadow: none !important;
 }
 
 #fraSidebarChat.hidden { display: none !important; }
@@ -412,6 +414,18 @@ h3 a[href*="chat.php"]:hover {
    Default theme served in the iframe is the cream/tan "desert" theme,
    which is why untouched chat shows light backgrounds with red text. */
 
+/* Iframe html / body — kill default Bootstrap margin and any pale
+   borders/backgrounds the desert theme leaves on the document edges. */
+html.nolayout,
+html.nolayout body,
+body.nolayout {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: rgba(8, 4, 2, 0.96) !important;
+    box-shadow: none !important;
+}
+
 /* Iframe body wrapper + main container */
 .s-chat-sidebar,
 #fra_chatContainer,
@@ -419,6 +433,9 @@ h3 a[href*="chat.php"]:hover {
     background: rgba(8, 4, 2, 0.96) !important;
     color: #8a7058 !important;
     font-family: 'EB Garamond', Georgia, serif !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
 }
 
 /* The CHANNEL bar at the top of the chat (MAIN ▼, settings menu) */
@@ -498,14 +515,25 @@ h3 a[href*="chat.php"]:hover {
     color: #8a7058 !important;
 }
 
-/* Each individual message row — alternate dark shades */
+/* Each individual message row — alternate dark shades.
+   position: relative anchors the absolute-positioned menu button
+   in the corner; the inner spans (content + timestamp) need
+   explicit display:block so they stack on their own lines instead
+   of running into each other. */
 .s-chat-message {
     background: rgba(14, 7, 3, 0.88) !important;
     border-bottom: 1px solid rgba(94, 48, 24, 0.18) !important;
     color: #8a7058 !important;
     text-shadow: none !important;
-    padding: 6px 10px !important;
+    padding: 6px 30px 8px 10px !important;
     margin: 0 !important;
+    position: relative !important;
+}
+
+/* Username row sits at the top — clearfix for any floats from icons */
+.s-chat-message > div:first-child {
+    display: block !important;
+    margin-bottom: 2px !important;
 }
 
 .s-chat-message:nth-of-type(odd) {
@@ -550,12 +578,23 @@ h3 a[href*="chat.php"]:hover {
     color: #f0b870 !important;
 }
 
-/* Message body text — main readability fix */
+/* Message body text — main readability fix.
+   display:block forces the content onto its own line below the
+   username, and word-break stops long pings from forcing a
+   horizontal scroll bar. */
 .s-chat-message_content,
 .s-chat-message_content * {
     color: #a89070 !important;
     text-shadow: none !important;
     background: transparent !important;
+}
+
+.s-chat-message_content {
+    display: block !important;
+    margin: 2px 0 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.45 !important;
 }
 
 .s-chat-message_content b {
@@ -568,17 +607,26 @@ h3 a[href*="chat.php"]:hover {
     background: transparent !important;
 }
 
-/* Timestamp text */
+/* Timestamp text — block-level + small top margin so it sits BELOW
+   the message body instead of inline-overlapping it. */
 .s-chat-message_timestamp {
+    display: block !important;
     color: #5a4838 !important;
     font-size: 10px !important;
     font-style: italic !important;
     font-family: 'EB Garamond', serif !important;
     text-shadow: none !important;
+    margin-top: 3px !important;
+    line-height: 1.2 !important;
+    clear: both !important;
 }
 
-/* Three-dot menu button on each message */
+/* Three-dot menu button on each message — pin it to the top-right
+   corner of the row so it doesn't push the content around. */
 .s-chat-message_menu {
+    position: absolute !important;
+    top: 6px !important;
+    right: 6px !important;
     background: rgba(40, 18, 6, 0.55) !important;
     border: 1px solid rgba(94, 48, 24, 0.32) !important;
     opacity: 0.55 !important;
