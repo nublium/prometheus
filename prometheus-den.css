@@ -1,6 +1,31 @@
 /* ============================================================
    PROMETHEUS'S DEN — phoenix fire theme
    for Tsaari (#37874) · css by nub (#166079)
+   ------------------------------------------------------------
+   YOU DON'T NEED TO EDIT THIS FILE.
+   All the text, image URLs and links you'll want to change live
+   in the HTML file (prometheus-den.html). Open that file and
+   look for the comments — every editable spot is marked with a
+   <!-- COMMENT --> directly above it telling you what to change.
+
+   Quick guide to the HTML:
+     • DEN NAME .................. line ~9    (the title text)
+     • KING IMAGE ................ line ~11   (your imgur URL)
+     • SUBTITLE .................. line ~15   (Prometheus's three lines)
+     • ARTWORK 1 (clickable) ..... line ~26   (your imgur URL)
+     • LORE TEXT ................. lines ~28–46 (your story)
+     • PLAYER NAME / ID .......... line ~58   (your name + #)
+     • PLAYER BIO ................ line ~60   (short blurb)
+     • INFO ROWS ................. lines ~62–64 (timezone, RP, trades)
+     • LINKS ..................... lines ~73–77 (replace each # with a URL)
+
+   If you ever DO want to tweak colours, the palette this layout
+   uses is:
+     • Background black ......... #0a0604
+     • Bronze ................... #5e3018, #8a4a1c
+     • Ember / gold ............. #b86628, #d48830
+     • Light text ............... #c8a878
+     • Bright gold accent ....... #e8a85c
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
