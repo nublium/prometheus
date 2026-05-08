@@ -52,11 +52,26 @@ div#lion_image > div {
     overflow: hidden !important;
 }
 
-/* small tag images (e.g. companion icons) */
-img[src*="/images/tags/"] {
+/* Premade tag/avatar images (e.g. images/tags/june/kfGjnfo.png) —
+   the small avatar / companion icon images Lioden lets you pick. */
+img[src*="images/tags/"],
+img[src*="/images/tags/"],
+img[src*="tags/june"],
+img[src*="tags/jul"],
+img[src*="tags/aug"],
+img[src*="tags/sep"],
+img[src*="tags/oct"],
+img[src*="tags/nov"],
+img[src*="tags/dec"],
+img[src*="tags/jan"],
+img[src*="tags/feb"],
+img[src*="tags/mar"],
+img[src*="tags/apr"],
+img[src*="tags/may"] {
     border-radius: 50% !important;
     border: 2px solid #8a4a1c !important;
-    box-shadow: 0 0 20px rgba(212, 136, 48, 0.28) !important;
+    box-shadow: 0 0 20px rgba(212, 136, 48, 0.30), 0 0 40px rgba(196, 72, 36, 0.12) !important;
+    object-fit: cover !important;
 }
 
 /* ============ NAVIGATION BAR ============ */
@@ -202,15 +217,130 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
     box-shadow: 0 0 10px rgba(184, 102, 40, 0.3) !important;
 }
 
-/* ============ CHATBOX ============ */
-#chatbox,
-#chatBody {
-    background: rgba(8, 4, 2, 0.92) !important;
-    border: 1px solid rgba(94, 48, 24, 0.28) !important;
-    color: #c8a878 !important;
+/* ============ CHATBOX (Lioden's actual sidebar chat) ============
+   Real structure on Lioden:
+     <h3 style="position: relative;">Chat Box
+       <div style="display: inline-block; text-align: right;">
+         <input id="btnToggleSidebarChat" value="Hide">
+       </div>
+       <div style="position: absolute; right: 0; top: 0; ...">
+         <a href="./chat.php">Chat Room ->></a>
+       </div>
+     </h3>
+     <div id="fraSidebarChat"><iframe ...></iframe></div>
+
+   The second wrapper is absolutely positioned at right:0 — that's
+   why it overlapped the Hide button. Fix: switch the h3 to flex,
+   reset the absolute positioning to static, and push the buttons
+   to the right with margin-left:auto. */
+
+/* The chat header h3 — every other h3 has no inline position style,
+   so [style*="position: relative"] uniquely targets this one. */
+h3[style*="position: relative"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    padding: 8px 12px !important;
+    margin: 14px 0 0 !important;
+    background: linear-gradient(180deg, rgba(48, 22, 6, 0.96), rgba(24, 10, 3, 0.99)) !important;
+    border: 1px solid rgba(140, 72, 24, 0.38) !important;
+    border-bottom: none !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 13px !important;
+    letter-spacing: 2px !important;
+    color: #d48830 !important;
+    text-transform: uppercase !important;
+    line-height: 1.4 !important;
+    overflow: visible !important;
 }
 
-/* Chat message rows — alternating darker/lighter */
+/* Hide-button wrapper: push it (and everything after) to the right */
+h3[style*="position: relative"] > div[style*="display: inline-block"] {
+    margin: 0 0 0 auto !important;
+    flex-shrink: 0 !important;
+    line-height: inherit !important;
+}
+
+/* Chat-room link wrapper: kill the inline position:absolute */
+h3[style*="position: relative"] > div[style*="position: absolute"] {
+    position: static !important;
+    margin: 0 !important;
+    line-height: inherit !important;
+    flex-shrink: 0 !important;
+}
+
+/* The Hide button (input type=button) */
+#btnToggleSidebarChat {
+    background: rgba(40, 18, 6, 0.92) !important;
+    border: 1px solid rgba(140, 72, 24, 0.50) !important;
+    color: #d48830 !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
+    padding: 3px 8px !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    line-height: 1.4 !important;
+    vertical-align: middle !important;
+    transition: all 0.3s ease !important;
+}
+
+#btnToggleSidebarChat:hover {
+    background: rgba(60, 28, 8, 0.96) !important;
+    border-color: rgba(212, 136, 48, 0.55) !important;
+    color: #e8a85c !important;
+    box-shadow: 0 0 6px rgba(184, 102, 40, 0.3) !important;
+}
+
+/* The "Chat Room ->" link */
+h3 a[href="./chat.php"],
+h3 a[href*="chat.php"] {
+    color: #b86628 !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    padding: 3px 7px !important;
+    border: 1px solid rgba(140, 72, 24, 0.40) !important;
+    background: rgba(40, 18, 6, 0.7) !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
+    transition: all 0.3s ease !important;
+}
+
+h3 a[href="./chat.php"]:hover,
+h3 a[href*="chat.php"]:hover {
+    color: #e8a85c !important;
+    border-color: rgba(212, 136, 48, 0.55) !important;
+    background: rgba(60, 28, 8, 0.9) !important;
+    text-shadow: none !important;
+}
+
+/* Sidebar chat iframe wrapper */
+#fraSidebarChat {
+    background: rgba(8, 4, 2, 0.92) !important;
+    border: 1px solid rgba(140, 72, 24, 0.38) !important;
+    border-top: none !important;
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+}
+
+#fraSidebarChat iframe {
+    background: rgba(8, 4, 2, 0.92) !important;
+    border: none !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+#fraSidebarChat.hidden { display: none !important; }
+
+/* Chat message row backgrounds — used inside the iframe and
+   on the full /chat.php page if the user navigates there. */
 .chat_light,
 #chatMessages .chat_light {
     background: rgba(12, 6, 3, 0.82) !important;
@@ -223,112 +353,6 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
     background: rgba(18, 9, 4, 0.90) !important;
     border-color: rgba(94, 48, 24, 0.14) !important;
     color: #c8a878 !important;
-}
-
-/* Chat header — the actual title bar with hide / room buttons.
-   Lioden uses #chatHeader (not h4 inside #chatbox).
-   Grid layout keeps "Chat Box" on the left and the buttons aligned
-   on the right with a real gap between them. */
-#chatHeader,
-.chatHeader {
-    background: linear-gradient(180deg, rgba(48, 22, 6, 0.96) 0%, rgba(24, 10, 3, 0.99) 100%) !important;
-    color: #d48830 !important;
-    font-family: 'Cinzel', serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    border-bottom: 1px solid rgba(140, 72, 24, 0.38) !important;
-    padding: 8px 12px !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    flex-wrap: nowrap !important;
-    gap: 8px !important;
-    line-height: 1.5 !important;
-    overflow: visible !important;
-    white-space: nowrap !important;
-}
-
-/* Buttons inside the chat header — small, compact, properly spaced */
-#chatHeader .btn,
-.chatHeader .btn,
-#chatHeader button,
-#chatHeader a,
-.chatHeader a {
-    background: rgba(40, 18, 6, 0.85) !important;
-    border: 1px solid rgba(140, 72, 24, 0.45) !important;
-    color: #d48830 !important;
-    font-family: 'Cinzel', serif !important;
-    font-size: 9px !important;
-    letter-spacing: 1px !important;
-    padding: 3px 8px !important;
-    text-transform: uppercase !important;
-    border-radius: 0 !important;
-    line-height: 1.4 !important;
-    text-decoration: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    flex-shrink: 0 !important;
-    min-width: 0 !important;
-    white-space: nowrap !important;
-}
-
-#chatHeader .btn:hover,
-.chatHeader .btn:hover,
-#chatHeader button:hover,
-#chatHeader a:hover,
-.chatHeader a:hover {
-    background: rgba(60, 28, 8, 0.95) !important;
-    border-color: rgba(212, 136, 48, 0.55) !important;
-    color: #e8a85c !important;
-    box-shadow: 0 0 6px rgba(184, 102, 40, 0.3) !important;
-    text-shadow: none !important;
-}
-
-/* The "Chat Box" title text node — pushes the buttons to the right */
-#chatHeader::first-letter { color: #e8a85c !important; }
-
-/* The chat-room link / quick-link */
-a[href*="chatroom"],
-a[href*="chat_room"] {
-    color: #b86628 !important;
-}
-
-a[href*="chatroom"]:hover,
-a[href*="chat_room"]:hover {
-    color: #e8a85c !important;
-}
-
-/* Room selector dropdown */
-#chatRoomSelector {
-    background: rgba(8, 4, 2, 0.92) !important;
-    border: 1px solid rgba(140, 72, 24, 0.42) !important;
-    color: #d48830 !important;
-    font-size: 10px !important;
-    padding: 3px 6px !important;
-    letter-spacing: 1px !important;
-    border-radius: 0 !important;
-    max-width: 110px !important;
-}
-
-/* Fallback: legacy #chatbox h4 (in case structure varies) */
-#chatbox h4,
-.chatbox h4 {
-    background: linear-gradient(180deg, rgba(48, 22, 6, 0.96) 0%, rgba(24, 10, 3, 0.99) 100%) !important;
-    color: #d48830 !important;
-    font-family: 'Cinzel', serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    font-size: 11px !important;
-    border-bottom: 1px solid rgba(140, 72, 24, 0.38) !important;
-    padding: 8px 12px !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
 }
 
 /* ============ INPUT FIELDS ============ */
