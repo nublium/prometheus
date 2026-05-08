@@ -59,10 +59,7 @@ div.container.main,
     color: #c8a878 !important;
 }
 
-/* ============ ROUND LION PORTRAIT ============
-   The lion image on Lioden isn't an <img> — it's a stack of layered
-   PNGs inside div#lion_image. Clipping the parent into a circle with
-   overflow:hidden gives us the round portrait frame. */
+/* ============ ROUND LION PORTRAIT ============ */
 div#lion_image,
 #lion_image {
     border-radius: 50% !important;
@@ -159,8 +156,6 @@ img[src*="tags/may"] {
     text-transform: uppercase !important;
     font-size: 12px !important;
     letter-spacing: 1.5px !important;
-    /* Bootstrap's panel-heading inherits a faint white text-shadow which
-       leaves a "pale rim" around letters on dark backgrounds — kill it. */
     text-shadow: none !important;
     box-shadow: none !important;
 }
@@ -171,12 +166,7 @@ img[src*="tags/may"] {
     box-shadow: none !important;
 }
 
-/* ============ SIDEBAR WIDGET RIM CLEAN-UP ============
-   Bootstrap defaults add subtle light box-shadows, white text-shadows
-   and pale outlines to .panel, .well, .thumbnail, fieldset, etc.
-   Against this dark theme they read as a "white rim" around the
-   achievement / bookmark / vitals widgets. This block strips all of
-   them inside the sidebar column. */
+/* ============ SIDEBAR WIDGET RIM CLEAN-UP ============*/
 .col-md-3 .panel,
 .col-md-3 .panel-default,
 .col-md-3 .panel-heading,
@@ -291,12 +281,7 @@ input[type="submit"]:hover, input[type="button"]:hover, button:hover {
          <a href="./chat.php">Chat Room ->></a>
        </div>
      </h3>
-     <div id="fraSidebarChat"><iframe ...></iframe></div>
-
-   The second wrapper is absolutely positioned at right:0 — that's
-   why it overlapped the Hide button. Fix: switch the h3 to flex,
-   reset the absolute positioning to static, and push the buttons
-   to the right with margin-left:auto. */
+     <div id="fraSidebarChat"><iframe ...></iframe></div> */
 
 /* The chat header h3 — every other h3 has no inline position style,
    so [style*="position: relative"] uniquely targets this one. */
@@ -405,17 +390,8 @@ h3 a[href*="chat.php"]:hover {
 
 #fraSidebarChat.hidden { display: none !important; }
 
-/* ============ CHAT IFRAME CONTENT — the actual chat messages ============
-   The chat sidebar is an iframe loading /chat.sidebar.php. Lioden's JS
-   (in territory.php) appends our prometheus-den.css to the iframe body
-   so our rules reach inside — but the iframe uses BEM-style selectors
-   (.s-chat-message, .s-chat__username, etc.), NOT the .chat_light /
-   .chat_dark classes of the legacy /chat.php page. We target both.
-   Default theme served in the iframe is the cream/tan "desert" theme,
-   which is why untouched chat shows light backgrounds with red text. */
+/* ============ CHAT IFRAME CONTENT — the actual chat messages ============ */
 
-/* Iframe html / body — kill default Bootstrap margin and any pale
-   borders/backgrounds the desert theme leaves on the document edges. */
 html.nolayout,
 html.nolayout body,
 body.nolayout {
@@ -515,11 +491,7 @@ body.nolayout {
     color: #8a7058 !important;
 }
 
-/* Each individual message row — alternate dark shades.
-   position: relative anchors the absolute-positioned menu button
-   in the corner; the inner spans (content + timestamp) need
-   explicit display:block so they stack on their own lines instead
-   of running into each other. */
+/* Each individual message row — alternate dark shades. */
 .s-chat-message {
     background: rgba(14, 7, 3, 0.88) !important;
     border-bottom: 1px solid rgba(94, 48, 24, 0.18) !important;
@@ -745,9 +717,7 @@ body.nolayout {
     text-shadow: none !important;
 }
 
-/* ============ LEGACY /chat.php PAGE — separate from sidebar iframe ============
-   Used only if the user clicks "Chat Room →" and visits the full chat page.
-   Kept in case our CSS leaks onto that page via global custom CSS. */
+/* ============ LEGACY /chat.php PAGE — separate from sidebar iframe ============ */
 .chat_light,
 #chatMessages .chat_light {
     background: rgba(12, 6, 3, 0.82) !important;
@@ -819,7 +789,7 @@ input:focus, select:focus, textarea:focus, .form-control:focus {
 .col-md-3 > a,
 a[href*="cave.php"],
 a[href*="unsorted.php"],
-a[href*="nesting.php"],
+a[href*="https://i.imgur.com/GxzS0g0.jpeg"],
 a[href*="pride.php"],
 a[href*="territory.php"] .thumbnail {
     background: linear-gradient(180deg, rgba(55, 30, 12, 0.78) 0%, rgba(24, 12, 4, 0.94) 100%) !important;
