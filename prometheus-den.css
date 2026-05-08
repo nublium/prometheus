@@ -146,6 +146,7 @@ img[src*="tags/may"] {
     border: 1px solid rgba(94, 48, 24, 0.28) !important;
     border-radius: 0 !important;
     color: #c8a878 !important;
+    box-shadow: none !important;
 }
 
 .panel-heading,
@@ -158,11 +159,49 @@ img[src*="tags/may"] {
     text-transform: uppercase !important;
     font-size: 12px !important;
     letter-spacing: 1.5px !important;
+    /* Bootstrap's panel-heading inherits a faint white text-shadow which
+       leaves a "pale rim" around letters on dark backgrounds — kill it. */
+    text-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .panel-body {
     background: transparent !important;
     color: #c8a878 !important;
+    box-shadow: none !important;
+}
+
+/* ============ SIDEBAR WIDGET RIM CLEAN-UP ============
+   Bootstrap defaults add subtle light box-shadows, white text-shadows
+   and pale outlines to .panel, .well, .thumbnail, fieldset, etc.
+   Against this dark theme they read as a "white rim" around the
+   achievement / bookmark / vitals widgets. This block strips all of
+   them inside the sidebar column. */
+.col-md-3 .panel,
+.col-md-3 .panel-default,
+.col-md-3 .panel-heading,
+.col-md-3 .panel-body,
+.col-md-3 .panel-footer,
+.col-md-3 .well,
+.col-md-3 .thumbnail,
+.col-md-3 fieldset,
+.col-md-3 legend,
+.col-md-3 .list-group,
+.col-md-3 .list-group-item,
+.sidebar .panel, .sidebar .well, .sidebar .thumbnail,
+aside .panel, aside .well, aside .thumbnail {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    outline: none !important;
+}
+
+/* Force any leftover Bootstrap light borders on sidebar boxes back to
+   the bronze palette so nothing reads as gray/white. */
+.col-md-3 .panel,
+.col-md-3 .panel-default,
+.col-md-3 .well,
+.col-md-3 fieldset {
+    border-color: rgba(94, 48, 24, 0.32) !important;
 }
 
 /* ============ TABLES ============ */
@@ -365,19 +404,44 @@ h3 a[href*="chat.php"]:hover {
 #fraSidebarChat.hidden { display: none !important; }
 
 /* Chat message row backgrounds — used inside the iframe and
-   on the full /chat.php page if the user navigates there. */
+   on the full /chat.php page if the user navigates there.
+   Text colour kept muted (not too bright) for comfortable reading. */
 .chat_light,
 #chatMessages .chat_light {
     background: rgba(12, 6, 3, 0.82) !important;
     border-color: rgba(94, 48, 24, 0.14) !important;
-    color: #c8a878 !important;
+    color: #8a7058 !important;
 }
 
 .chat_dark,
 #chatMessages .chat_dark {
     background: rgba(18, 9, 4, 0.90) !important;
     border-color: rgba(94, 48, 24, 0.14) !important;
-    color: #c8a878 !important;
+    color: #8a7058 !important;
+}
+
+/* Chat text — names, message bodies, timestamps, system text.
+   Keep all of it muted so nothing screams against the dark background. */
+.chat_light, .chat_light *,
+.chat_dark, .chat_dark *,
+#chatMessages, #chatMessages *,
+#fraSidebarChat, #fraSidebarChat * {
+    color: #8a7058 !important;
+    text-shadow: none !important;
+}
+
+/* Usernames / links inside chat — slightly brighter ember so they stand out
+   without being glaring. */
+.chat_light a, .chat_dark a,
+#chatMessages a, #fraSidebarChat a {
+    color: #a0673a !important;
+    text-shadow: none !important;
+}
+
+.chat_light a:hover, .chat_dark a:hover,
+#chatMessages a:hover, #fraSidebarChat a:hover {
+    color: #d48830 !important;
+    text-shadow: none !important;
 }
 
 /* ============ INPUT FIELDS ============ */
