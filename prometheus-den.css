@@ -19,6 +19,12 @@
      • INFO ROWS ................. lines ~62–64 (timezone, RP, trades)
      • LINKS ..................... lines ~73–77 (replace each # with a URL)
 
+   ONE THING IN THIS FILE you may want to edit: the cave / mound
+   placeholder images. Search this file for the section header
+   "CAVE / MOUND IMAGE REPLACEMENT" — every banner and cave has
+   its own block with a url('...') line you can replace with
+   your own image link.
+
    If you ever DO want to tweak colours, the palette this layout
    uses is:
      • Background black ......... #0a0604
@@ -891,6 +897,150 @@ a[href*="territory.php"] .thumbnail {
     border-color: #c87838 !important;
     background: linear-gradient(180deg, rgba(75, 40, 16, 0.85) 0%, rgba(34, 18, 8, 0.96) 100%) !important;
     color: #e8a85c !important;
+}
+
+/* ============================================================
+   CAVE / MOUND IMAGE REPLACEMENT
+   ------------------------------------------------------------
+   Lioden ships every territory page with three banner buttons
+   (UNSORTED, NESTING, PRIDE OVERVIEW), an auto-generated list
+   of your individual caves and a list of your beetle mounds.
+   Each tile shows a stock Lioden image (cavedefault.jpg etc.).
+
+   This block hides those stock images and replaces them with
+   coloured SVG placeholders hosted alongside this stylesheet.
+   The placeholders are intentionally simple (single-colour
+   gradients) so you can swap them later for any image you like.
+
+   ── HOW TO REPLACE A PLACEHOLDER WITH YOUR OWN IMAGE ──
+   1. Upload your image to imgur.com (or anywhere it can be
+      hot-linked from). Right-click the image → "Copy image
+      address". You want a URL ending in .jpg / .png / .gif.
+   2. Find the matching CSS rule below (each cave / banner has
+      its own block, labelled with the cave name and ID).
+   3. Replace the existing url('...') with your new URL. Done.
+   ============================================================ */
+
+/* Hide the stock Lioden cave/mound thumbnails — we paint over
+   the container with a background-image instead. */
+.cave-grid img,
+.mound-grid img,
+[id="fraOrganizationBlock"] .cave-grid img,
+#fraCaveList .cave-grid img,
+#fraMoundList .mound-grid img {
+    display: none !important;
+}
+
+/* The tile containers — fixed height, themed border, label
+   sits centred at the bottom over a darkened gradient. */
+.cave-grid,
+.mound-grid {
+    width: 100% !important;
+    height: 130px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border: 1px solid rgba(140, 72, 24, 0.42) !important;
+    color: #e8a85c !important;
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    font-size: 11px !important;
+    text-align: center !important;
+    padding: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85), 0 0 12px rgba(0, 0, 0, 0.7) !important;
+    box-shadow: inset 0 -50px 60px -20px rgba(0, 0, 0, 0.65) !important;
+    transition: all 0.35s ease !important;
+}
+
+.mound-grid {
+    height: 100px !important;
+    font-size: 10px !important;
+}
+
+a:hover .cave-grid,
+a:hover .mound-grid {
+    border-color: #c87838 !important;
+    box-shadow: inset 0 -50px 60px -20px rgba(0, 0, 0, 0.65), 0 0 18px rgba(212, 136, 48, 0.30) !important;
+    color: #f0c068 !important;
+}
+
+/* ── DEFAULT CAVE PLACEHOLDER ──
+   Applied to every <a href="cave.php?id=..."> by default. Each
+   specific cave below can override this with its own image. */
+a[href*="cave.php"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-cave.svg');
+}
+
+/* ── ORGANISATIONAL BANNERS (top row) ── */
+
+/* "X unsorted" banner */
+a[href*="unsorted.php"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-unsorted.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* "X Pregnant Lioness" banner (no link wrapper, so target by position) */
+#fraOrganizationBlock > .col-md-4:nth-of-type(2) .cave-grid,
+#fraOrganizationBlock .cave-grid:not(a *) {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-nesting.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* "View Pride Overview" banner */
+a[href*="lionoverview.php"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-pride.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* ── INDIVIDUAL CAVES — one rule per cave ID ──
+   The ID comes from the cave's URL: cave.php?id=XXXXX. Each cave
+   you currently have is listed below. To add a new cave, copy any
+   block and change the ID + URL. To remove one, just delete the
+   block (it'll fall back to the default cave placeholder above). */
+
+/* Cave #19694 — Celestial Kingdom */
+a[href*="cave.php?id=19694"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-cave.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* Cave #486 — Frozen Chasm */
+a[href*="cave.php?id=486"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-cave.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* Cave #81601 — Prometheus */
+a[href*="cave.php?id=81601"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-cave.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* Cave #429628 — i. */
+a[href*="cave.php?id=429628"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-cave.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* Cave #429629 — ii. */
+a[href*="cave.php?id=429629"] .cave-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-cave.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
+}
+
+/* ── BEETLE MOUNDS ──
+   All mounds share one image by default. To give each mound its
+   own image, copy the cave-ID pattern above using mound IDs:
+       a[href*="mound.php?id=12385"] .mound-grid { ... } */
+a[href*="mound.php"] .mound-grid {
+    background-image: url('https://nublium.github.io/prometheus/placeholder-mound.svg');
+    /* TO USE A CUSTOM IMAGE — replace the URL above with your own. */
 }
 
 /* ============ COMMENT BOX ============ */
